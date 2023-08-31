@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "game1": "node ./exercicios/par-ou-impar.js",
-    "game2": "node ./exercicios/pedra-papel-tesoura.js"
+    "start": "tsc && node ./build/index.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "typescript": "^5.2.2"
+  }
 }
