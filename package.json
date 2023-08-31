@@ -1,0 +1,14 @@
+{
+  "name": "labecommerce-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "game1": "node ./exercicios/par-ou-impar.js",
+    "game2": "node ./exercicios/pedra-papel-tesoura.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
