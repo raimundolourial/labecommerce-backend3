@@ -13,7 +13,7 @@ export const users: TUsers[] = [
         name: 'Beltrana',
         email: 'beltrana@email.com',
         password: 'beltrana00',
-        createdAt: new Date().toISOString(),
+        createdAt: new Date().toLocaleString(),
     },
 ];
 
