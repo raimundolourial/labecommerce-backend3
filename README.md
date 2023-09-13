@@ -15,7 +15,7 @@
 <span><strong>Tecnologias e Ferramentas utilizadas:</strong></span>
 <br>
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=nodejs,github,git,typescript" style="height: 25px;"/>
+    <img src="https://skillicons.dev/icons?i=nodejs,typescript,express,git,github,postman" style="height: 25px;"/>
   </a>
 </p>
 
