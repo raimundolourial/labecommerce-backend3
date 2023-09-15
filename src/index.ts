@@ -105,3 +105,56 @@ app.post('/products', (req: Request, res: Response) => {
     products.push(newProduct);
     res.status(201).send('Produto cadastrado com sucesso');
 });
+
+// deleteUserById
+app.delete('/users/:id', (req: Request, res: Response) => {
+    const id = req.params.id;
+    const indexToDelete = users.findIndex((user) => user.id === id);
+    if (indexToDelete >= 0) {
+        users.splice(indexToDelete, 1);
+    } else {
+        console.log(`O id ${id} não existe`);
+    }
+    res.status(200).send({
+        message: `User apagado com sucesso`,
+    });
+});
+
+// deleteProductById
+app.delete('/products/:id', (req: Request, res: Response) => {
+    const id = req.params.id;
+    const indexToDelete = products.findIndex((product) => product.id === id);
+    if (indexToDelete >= 0) {
+        products.splice(indexToDelete, 1);
+    } else {
+        console.log(`O id ${id} não existe`);
+    }
+    res.status(200).send({
+        message: `Produto apagado com sucesso`,
+    });
+});
+
+// editProductById
+app.put('/products/:id', (req: Request, res: Response) => {
+    const id = req.params.id;
+    const newId = req.body.id as string | undefined;
+    const newName = req.body.name as string | undefined;
+    const newPrice = req.body.price as number | undefined;
+    const newDescription = req.body.description as string | undefined;
+    const newImageUrl = req.body.imageUrl as string | undefined;
+
+    const product = products.find((product) => product.id === id);
+
+    if (product) {
+        product.id = newId || product.id;
+        product.name = newName || product.name;
+        product.price =
+            newPrice !== undefined && !isNaN(Number(newPrice))
+                ? newPrice
+                : product.price;
+        product.description = newDescription || product.description;
+        product.imageUrl = newImageUrl || product.imageUrl;
+    }
+
+    res.status(200).send({ message: 'Atualização realizada com sucesso' });
+});
