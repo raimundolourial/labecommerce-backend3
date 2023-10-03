@@ -92,7 +92,7 @@ VALUES (
         'prod002',
         'Mouse',
         300,
-        'Um bom monitor',
+        'Um bom mouse',
         'https://picsum.photos/seed/Monitor/400'
     ), (
         'prod003',
@@ -113,3 +113,64 @@ VALUES (
         'Um bom Suporte de Monitor',
         'https://picsum.photos/seed/Monitor/400'
     )
+
+-- CRIANDO QUERIES PARA FUTUROS ENDPOINTS:
+
+-- EXERCÍCIO 1
+
+-- Get All Users
+
+SELECT name FROM users;
+
+-- Get All Products (funcionalidade 1)
+
+SELECT name FROM products;
+
+-- Get all Products (funcionalidade 2)
+
+SELECT name FROM products WHERE name LIKE '%monitor%';
+
+-- EXERCÍCIO 2
+
+-- Create User
+
+INSERT INTO users
+VALUES (
+        'u004',
+        'Atlas',
+        'atlas@gmail.com',
+        'Atlas@123',
+        Date()
+    )
+
+-- Create Product
+
+INSERT INTO products
+VALUES (
+        'prod006',
+        'Teclado Mecânico',
+        1600,
+        'Um bom teclado mecânico',
+        'https://picsum.photos/seed/tecladoMecanico/400'
+    )
+
+-- EXERCÍCIO 3
+
+-- Delete User by id
+
+DELETE FROM users WHERE id = 'u001' 
+
+-- Delete Product by id
+
+DELETE FROM products WHERE id = 'prod001' 
+
+-- Edit Product by id
+
+UPDATE products
+SET
+    id = 'prod007',
+    name = 'Mouse Gamer Com Led',
+    price = 350,
+    description = 'Um bom mouse pad gamer com led',
+    image_url = 'https://picsum.photos/seed/mouseGamer/400'
+WHERE id = 'prod002';
