@@ -174,3 +174,83 @@ SET
     description = 'Um bom mouse pad gamer com led',
     image_url = 'https://picsum.photos/seed/mouseGamer/400'
 WHERE id = 'prod002';
+
+---------------------------------------------------------
+
+-- aprofundamente sql 1:
+
+-- Exercício 1:
+
+CREATE TABLE
+    purchases (
+        id TEXT PRIMARY KEY UNIQUE NOT NULL,
+        buyer TEXT NOT NULL,
+        total_price REAL NOT NULL,
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (buyer) REFERENCES users(id)
+    );
+
+-- Visualizando todas as tabelas
+
+SELECT * FROM users;
+
+-- DELEÇÃO --
+
+DROP TABLE users;
+
+DELETE FROM users;
+
+SELECT * FROM products;
+
+DROP TABLE products;
+
+DELETE FROM products;
+
+SELECT * FROM purchases;
+
+DROP TABLE purchases;
+
+DELETE FROM purchases;
+
+---------------
+
+-- Exercício 2:
+
+-- a)
+
+INSERT INTO purchases
+VALUES (
+        'pur001',
+        'u001',
+        '150.00',
+        '03.10.2023'
+    ), (
+        'pur002',
+        'u002',
+        '250.00',
+        '06.10.2023'
+    ), (
+        'pur003',
+        'u003',
+        '350.00',
+        '09.10.2023'
+    ), (
+        'pur004',
+        'u004',
+        '450.00',
+        '12.10.2023'
+    );
+
+-- b)
+
+UPDATE purchases SET total_price = 120.00 WHERE id = 'pur001';
+
+SELECT
+    purchases.id AS purchases_id,
+    buyer AS buyer_id,
+    users.name AS buyer_name,
+    users.email AS email,
+    total_price,
+    purchases.created_at
+FROM users
+    INNER JOIN purchases ON buyer = users.id;
