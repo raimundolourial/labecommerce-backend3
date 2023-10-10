@@ -1,8 +1,6 @@
 -- Active: 1695688856268@@127.0.0.1@3306
 
--- users --------------------------------------------
-
--- CREATE:
+-- =========================================> users <=========================================
 
 CREATE TABLE
     users (
@@ -13,15 +11,7 @@ CREATE TABLE
         created_at TEXT NOT NULL
     );
 
--- READ:
-
 SELECT * FROM users;
-
--- DELETE:
-
-DROP TABLE users;
-
--- CREATE:
 
 INSERT INTO
     users (
@@ -51,9 +41,7 @@ VALUES (
         Date()
     )
 
--- products --------------------------------------------
-
--- CREATE:
+-- =========================================> products <=========================================
 
 CREATE TABLE
     products (
@@ -64,15 +52,7 @@ CREATE TABLE
         image_url TEXT NOT NULL
     );
 
--- READ:
-
 SELECT * FROM products;
-
--- DELETE:
-
-DROP TABLE products;
-
--- CREATE:
 
 INSERT INTO
     products (
@@ -114,9 +94,9 @@ VALUES (
         'https://picsum.photos/seed/Monitor/400'
     )
 
--- CRIANDO QUERIES PARA FUTUROS ENDPOINTS:
+-- ==============================> CRIANDO VISUALIZAÇÕES PARA FUTUROS ENDPOINTS <==============================
 
--- EXERCÍCIO 1
+-- ==========================================> users e products <==============================================
 
 -- Get All Users
 
@@ -129,8 +109,6 @@ SELECT name FROM products;
 -- Get all Products (funcionalidade 2)
 
 SELECT name FROM products WHERE name LIKE '%monitor%';
-
--- EXERCÍCIO 2
 
 -- Create User
 
@@ -154,8 +132,6 @@ VALUES (
         'https://picsum.photos/seed/tecladoMecanico/400'
     )
 
--- EXERCÍCIO 3
-
 -- Delete User by id
 
 DELETE FROM users WHERE id = 'u001' 
@@ -166,6 +142,8 @@ DELETE FROM products WHERE id = 'prod001'
 
 -- Edit Product by id
 
+-- ATENÇÃO -> ESSE COMANDO MUDA O ID, PORTANTO, SE EXECUTADA O ID 'prod002' não existe mais!
+
 UPDATE products
 SET
     id = 'prod007',
@@ -175,11 +153,7 @@ SET
     image_url = 'https://picsum.photos/seed/mouseGamer/400'
 WHERE id = 'prod002';
 
----------------------------------------------------------
-
--- aprofundamente sql 1:
-
--- Exercício 1:
+-- =========================================> purchases <=========================================
 
 CREATE TABLE
     purchases (
@@ -187,36 +161,8 @@ CREATE TABLE
         buyer TEXT NOT NULL,
         total_price REAL NOT NULL,
         created_at TEXT NOT NULL,
-        FOREIGN KEY (buyer) REFERENCES users(id)
+        FOREIGN KEY (buyer) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
-
--- Visualizando todas as tabelas
-
-SELECT * FROM users;
-
--- DELEÇÃO --
-
-DROP TABLE users;
-
-DELETE FROM users;
-
-SELECT * FROM products;
-
-DROP TABLE products;
-
-DELETE FROM products;
-
-SELECT * FROM purchases;
-
-DROP TABLE purchases;
-
-DELETE FROM purchases;
-
----------------
-
--- Exercício 2:
-
--- a)
 
 INSERT INTO purchases
 VALUES (
@@ -241,7 +187,7 @@ VALUES (
         '12.10.2023'
     );
 
--- b)
+SELECT * FROM purchases;
 
 UPDATE purchases SET total_price = 120.00 WHERE id = 'pur001';
 
@@ -254,3 +200,43 @@ SELECT
     purchases.created_at
 FROM users
     INNER JOIN purchases ON buyer = users.id;
+
+-- =========================================> purchases_products <=========================================
+
+CREATE TABLE
+    purchases_products (
+        purchase_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
+        quantity INTEGER NOT NULL,
+        FOREIGN KEY (purchase_id) REFERENCES purchases(id) ON UPDATE CASCADE ON DELETE CASCADE,
+        FOREIGN KEY (product_id) REFERENCES products(id) ON UPDATE CASCADE ON DELETE CASCADE
+    );
+
+INSERT INTO
+    purchases_products (
+        purchase_id,
+        product_id,
+        quantity
+    )
+VALUES ('pur001', 'prod002', 2), ('pur002', 'prod001', 5), ('pur003', 'prod003', 1);
+
+SELECT * FROM purchases_products;
+
+-- Informações mais relevantes:
+
+SELECT
+    purchase_id AS IdDaCompra,
+    product_id AS IdDoProduto,
+    products.name AS NomeDoProduto,
+    quantity AS QuantidadeComprada,
+    price AS PreçoUnitario
+FROM purchases_products
+    INNER JOIN products ON purchases_products.product_id = products.id
+    INNER JOIN purchases ON purchases_products.purchase_id = purchases.id
+
+-- Todas as informações das três tabelas:
+
+SELECT *
+FROM purchases_products
+    INNER JOIN products ON purchases_products.product_id = products.id
+    INNER JOIN purchases ON purchases_products.purchase_id = purchases.id
