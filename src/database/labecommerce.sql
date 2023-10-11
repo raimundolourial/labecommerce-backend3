@@ -1,4 +1,4 @@
--- Active: 1695688856268@@127.0.0.1@3306
+-- Active: 1697050904632@@127.0.0.1@3306
 
 -- =========================================> users <=========================================
 
@@ -8,37 +8,36 @@ CREATE TABLE
         name TEXT NOT NULL,
         email TEXT UNIQUE NOT NULL,
         password TEXT NOT NULL,
-        created_at TEXT NOT NULL
+        created_at DATETIME DEFAULT (
+            strftime(
+                '%d-%m-%Y %H:%M:%S',
+                'now',
+                'localtime'
+            )
+        ) NOT NULL
     );
 
 SELECT * FROM users;
 
+DROP TABLE users;
+
 INSERT INTO
-    users (
-        id,
-        name,
-        email,
-        password,
-        created_at
-    )
+    users (id, name, email, password)
 VALUES (
         'u001',
         'Lily',
         'lily@gmail.com',
-        'Lily@123',
-        Date()
+        'Lily@123'
     ), (
         'u002',
         'Emmy',
         'emmy@gmail.com',
-        'Emmy@123',
-        Date()
+        'Emmy@123'
     ), (
         'u003',
         'Alyssa',
         'alyssa@gmail.com',
-        'Alyssa@123',
-        Date()
+        'Alyssa@123'
     )
 
 -- =========================================> products <=========================================
@@ -102,6 +101,8 @@ VALUES (
 
 SELECT name FROM users;
 
+SELECT * FROM products;
+
 -- Get All Products (funcionalidade 1)
 
 SELECT name FROM products;
@@ -112,13 +113,13 @@ SELECT name FROM products WHERE name LIKE '%monitor%';
 
 -- Create User
 
-INSERT INTO users
+INSERT INTO
+    users (id, name, email, password)
 VALUES (
         'u004',
         'Atlas',
         'atlas@gmail.com',
-        'Atlas@123',
-        Date()
+        'Atlas@123'
     )
 
 -- Create Product
@@ -144,14 +145,21 @@ DELETE FROM products WHERE id = 'prod001'
 
 -- ATENÇÃO -> ESSE COMANDO MUDA O ID, PORTANTO, SE EXECUTADA O ID 'prod002' não existe mais!
 
-UPDATE products
-SET
-    id = 'prod007',
-    name = 'Mouse Gamer Com Led',
-    price = 350,
-    description = 'Um bom mouse pad gamer com led',
-    image_url = 'https://picsum.photos/seed/mouseGamer/400'
-WHERE id = 'prod002';
+-- UPDATE products
+
+-- SET
+
+--     id = 'prod007',
+
+--     name = 'Mouse Gamer Com Led',
+
+--     price = 350,
+
+--     description = 'Um bom mouse pad gamer com led',
+
+--     image_url = 'https://picsum.photos/seed/mouseGamer/400'
+
+-- WHERE id = 'prod002';
 
 -- =========================================> purchases <=========================================
 
@@ -160,32 +168,21 @@ CREATE TABLE
         id TEXT PRIMARY KEY UNIQUE NOT NULL,
         buyer TEXT NOT NULL,
         total_price REAL NOT NULL,
-        created_at TEXT NOT NULL,
+        created_at TEXT DATETIME DEFAULT (
+            strftime(
+                '%d-%m-%Y %H:%M:%S',
+                'now',
+                'localtime'
+            )
+        ) NOT NULL,
         FOREIGN KEY (buyer) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE
     );
 
-INSERT INTO purchases
-VALUES (
-        'pur001',
-        'u001',
-        '150.00',
-        '03.10.2023'
-    ), (
-        'pur002',
-        'u002',
-        '250.00',
-        '06.10.2023'
-    ), (
-        'pur003',
-        'u003',
-        '350.00',
-        '09.10.2023'
-    ), (
-        'pur004',
-        'u004',
-        '450.00',
-        '12.10.2023'
-    );
+INSERT INTO
+    purchases (id, buyer, total_price)
+VALUES ('pur001', 'u001', '150.00'), ('pur002', 'u002', '250.00'), ('pur003', 'u003', '350.00'), ('pur004', 'u004', '450.00');
+
+DROP TABLE purchases;
 
 SELECT * FROM purchases;
 
