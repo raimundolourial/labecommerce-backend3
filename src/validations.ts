@@ -35,9 +35,7 @@ export const isNotEmpty = (
         res.statusCode = 400;
         throw new Error(`${nameElement} não pode ficar vazio`);
     }
-
     const inputNoSpaces = String(element).trim();
-
     if (inputNoSpaces === '') {
         res.statusCode = 400;
         throw new Error(`${nameElement} não pode ficar vazio`);

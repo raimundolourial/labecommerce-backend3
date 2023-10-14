@@ -215,9 +215,11 @@ INSERT INTO
         product_id,
         quantity
     )
-VALUES ('pur001', 'prod002', 2), ('pur002', 'prod001', 5), ('pur003', 'prod003', 1);
+VALUES ('pur005', 'prod002', 2), ('pur002', 'prod004', 5), ('pur003', 'prod003', 1);
 
 SELECT * FROM purchases_products;
+
+DROP TABLE purchases_products 
 
 -- Informações mais relevantes:
 
