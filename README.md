@@ -409,28 +409,28 @@ A API inclui tratamento de erros para lidar com várias situações, como valida
 
 [🔼](#índice)
 
--   [ ✔ ] Estruturar os dados como planejado:
+-   [ ] Estruturar os dados como planejado:
 
-    -   [ ✔ ] O banco de dados deve possuir as tabelas e colunas conforme o diagrama;
-    -   [ ✔ ] As requisições também devem respeitar o que é esperado, você pode confirmar as estruturas vendo os exemplos de cada endpoint;
-    -   [ ✔ ] Garanta que tanto o body, quanto a resposta e seu status estejam de acordo com o que foi planejado.
+    -   [ ] O banco de dados deve possuir as tabelas e colunas conforme o diagrama;
+    -   [ ] As requisições também devem respeitar o que é esperado, você pode confirmar as estruturas vendo os exemplos de cada endpoint;
+    -   [ ] Garanta que tanto o body, quanto a resposta e seu status estejam de acordo com o que foi planejado.
 
--   [ ✔ ] Implementar os Endpoints :
+-   [ ] Implementar os Endpoints :
 
-    -   [ ✔ ] Get all users
-    -   [ ✔ ] Create user
-    -   [ ✔ ] Create product
-    -   [ ✔ ] Get all products funcionalidades 1 e 2
-    -   [ ✔ ] Edit product by id
-    -   [ ✔ ] Create purchase
-    -   [ ✔ ] Delete purchase by id
-    -   [ ✔ ] Get purchase by id
+    -   [ ] Get all users
+    -   [ ] Create user
+    -   [ ] Create product
+    -   [ ] Get all products funcionalidades 1 e 2
+    -   [ ] Edit product by id
+    -   [ ] Create purchase
+    -   [ ] Delete purchase by id
+    -   [ ] Get purchase by id
 
--   [ ✔ ] Documentação no Postman de todos os endpoints (obrigatória para correção)
+-   [ ] Documentação no Postman de todos os endpoints (obrigatória para correção)
 
-    -   [ ✔ ] Descrevendo os endpoints e colocando os exemplos de respostas
+    -   [ ] Descrevendo os endpoints e colocando os exemplos de respostas
 
--   [ ✔ ] Criar o arquivo README.md , explicando seu projeto com prints das respostas
+-   [ ] Criar o arquivo README.md , explicando seu projeto com prints das respostas
 
 ## 8. Desenvolvedora
 
