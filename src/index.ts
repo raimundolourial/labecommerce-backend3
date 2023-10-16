@@ -58,7 +58,8 @@ app.get('/users', async (req: Request, res: Response) => {
                 'password',
                 'created_at AS createdAt'
             )
-            .from('users');
+            .from('users')
+            .orderBy('id', 'ASC');
         res.status(200).send(result);
     } catch (error) {
         console.log(error);
@@ -77,7 +78,7 @@ app.get('/users', async (req: Request, res: Response) => {
 // ✅ Detalhes revisados!
 app.get('/products', async (req: Request, res: Response) => {
     try {
-        const query: string = req.query.q as string;
+        const query: string = req.query.name as string;
         let result;
         if (!query) {
             result = await db
@@ -88,7 +89,8 @@ app.get('/products', async (req: Request, res: Response) => {
                     'description',
                     'image_url AS imageUrl'
                 )
-                .from('products');
+                .from('products')
+                .orderBy('id', 'ASC');
         } else {
             result = await db
                 .select(
@@ -99,6 +101,7 @@ app.get('/products', async (req: Request, res: Response) => {
                     'image_url AS imageUrl'
                 )
                 .from('products')
+                .orderBy('id', 'ASC')
                 .whereLike('name', `%${query}%`);
         }
         res.status(200).send(result);
@@ -120,7 +123,7 @@ app.get('/products', async (req: Request, res: Response) => {
 // ✔ Get all purchases:
 app.get('/purchases', async (req: Request, res: Response) => {
     try {
-        const result = await db('purchases');
+        const result = await db('purchases').orderBy('id', 'ASC');
         res.status(200).send(result);
     } catch (error) {
         console.log(error);
@@ -546,44 +549,44 @@ app.delete('/purchases/:id', async (req: Request, res: Response) => {
 });
 
 // EXTRA - DELETES PRODUCTS E USERS
-// ✔ deleteUserById
-// app.delete('/users/:id', async (req: Request, res: Response) => {
-//     try {
-//         const id = req.params.id;
-//         const [verifyId] = await db.raw(
-//             `SELECT id FROM users WHERE id ="${id}"`
-//         );
-//         if (!verifyId) {
-//             throw new Error('Não existe usuário com o id fornecido');
-//         }
-//         await db.raw(`DELETE FROM users WHERE id ="${id}"`);
-//         res.status(200).send({
-//             message: 'Usuário excluído com sucesso',
-//         });
-//     } catch (error) {
-//         if (error instanceof Error) {
-//             res.send(error.message);
-//         }
-//     }
-// });
+// ✔ Delete user by id
+app.delete('/users/:id', async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const [verifyId] = await db.raw(
+            `SELECT id FROM users WHERE id ="${id}"`
+        );
+        if (!verifyId) {
+            throw new Error('Não existe usuário com o id fornecido');
+        }
+        await db.raw(`DELETE FROM users WHERE id ="${id}"`);
+        res.status(200).send({
+            message: 'Usuário excluído com sucesso',
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            res.send(error.message);
+        }
+    }
+});
 
 // ✔ deleteProductById
-// app.delete('/products/:id', async (req: Request, res: Response) => {
-//     try {
-//         const id = req.params.id;
-//         const [verifyId] = await db.raw(
-//             `SELECT id FROM products WHERE id ="${id}"`
-//         );
-//         if (!verifyId) {
-//             throw new Error('Não existe produto com o id fornecido');
-//         }
-//         await db.raw(`DELETE FROM products WHERE id ="${id}"`);
-//         res.status(200).send({
-//             message: 'Produto excluído com sucesso',
-//         });
-//     } catch (error) {
-//         if (error instanceof Error) {
-//             res.send(error.message);
-//         }
-//     }
-// });
+app.delete('/products/:id', async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id;
+        const [verifyId] = await db.raw(
+            `SELECT id FROM products WHERE id ="${id}"`
+        );
+        if (!verifyId) {
+            throw new Error('Não existe produto com o id fornecido');
+        }
+        await db.raw(`DELETE FROM products WHERE id ="${id}"`);
+        res.status(200).send({
+            message: 'Produto excluído com sucesso',
+        });
+    } catch (error) {
+        if (error instanceof Error) {
+            res.send(error.message);
+        }
+    }
+});
