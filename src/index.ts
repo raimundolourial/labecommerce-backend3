@@ -58,7 +58,8 @@ app.get('/users', async (req: Request, res: Response) => {
                 'password',
                 'created_at AS createdAt'
             )
-            .from('users');
+            .from('users')
+            .orderBy('id', 'ASC');
         res.status(200).send(result);
     } catch (error) {
         console.log(error);
@@ -88,7 +89,8 @@ app.get('/products', async (req: Request, res: Response) => {
                     'description',
                     'image_url AS imageUrl'
                 )
-                .from('products');
+                .from('products')
+                .orderBy('id', 'ASC');
         } else {
             result = await db
                 .select(
@@ -99,6 +101,7 @@ app.get('/products', async (req: Request, res: Response) => {
                     'image_url AS imageUrl'
                 )
                 .from('products')
+                .orderBy('id', 'ASC')
                 .whereLike('name', `%${query}%`);
         }
         res.status(200).send(result);
@@ -120,7 +123,7 @@ app.get('/products', async (req: Request, res: Response) => {
 // ✔ Get all purchases:
 app.get('/purchases', async (req: Request, res: Response) => {
     try {
-        const result = await db('purchases');
+        const result = await db('purchases').orderBy('id', 'ASC');
         res.status(200).send(result);
     } catch (error) {
         console.log(error);
