@@ -143,23 +143,16 @@ DELETE FROM products WHERE id = 'prod001'
 
 -- Edit Product by id
 
--- ATENÇÃO -> ESSE COMANDO MUDA O ID, PORTANTO, SE EXECUTADA O ID 'prod002' não existe mais!
+-- ATENÇÃO -> ESSE COMANDO MUDA O ID, PORTANTO, SE EXECUTADO O ID 'prod002' não existe mais!
 
--- UPDATE products
-
--- SET
-
---     id = 'prod007',
-
---     name = 'Mouse Gamer Com Led',
-
---     price = 350,
-
---     description = 'Um bom mouse pad gamer com led',
-
---     image_url = 'https://picsum.photos/seed/mouseGamer/400'
-
--- WHERE id = 'prod002';
+UPDATE products
+SET
+    id = 'prod007',
+    name = 'Mouse Gamer Com Led',
+    price = 350,
+    description = 'Um bom mouse pad gamer com led',
+    image_url = 'https://picsum.photos/seed/mouseGamer/400'
+WHERE id = 'prod002';
 
 -- =========================================> purchases <=========================================
 
