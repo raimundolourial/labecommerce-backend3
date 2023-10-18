@@ -4,7 +4,7 @@
 
 ![endpoints_postman](./src/images/endpoints_postman.gif)
 
-Clique [**AQUI**](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#038765ca-c528-4237-a382-6730cdccb12c) para conferir o resultado final da API!
+Clique [**AQUI**](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#intro) para conferir o resultado final da API!
 
 <p align="center">
 <br>
@@ -87,7 +87,7 @@ npm run dev
 
 [🔼](#índice)
 
-Clique [aqui](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#038765ca-c528-4237-a382-6730cdccb12c) para visualizar a documentação da [API LABECOMMERCE](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#038765ca-c528-4237-a382-6730cdccb12c).
+Clique [**AQUI**](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#intro) para visualizar a documentação da [API LABECOMMERCE](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#intro).
 
 A base URL para esta API é **`http://localhost:3003`**
 
@@ -345,25 +345,33 @@ A API fornece os seguintes endpoints para interagir com usuários, produtos e co
     ```json
     // Request
     // path params = :id
-    // GET http://localhost:3003/purchases/pur001
+    // GET http://localhost:3003/purchases/pur003
 
     // Response
     // status 200 OK
     {
-        "purchaseId": "pur001",
-        "buyerId": "u002",
-        "buyerName": "Layla",
-        "buyerEmail": "layla@gmail.com",
-        "totalPrice": 800,
-        "createdAt": "16-10-2023 12:51:28",
+        "purchaseId": "pur002",
+        "buyerId": "u003",
+        "buyerName": "Verity",
+        "buyerEmail": "verity@gmail.com",
+        "totalPrice": 2129,
+        "createdAt": "17-10-2023 23:04:50",
         "products": [
             {
-                "id": "prod003",
-                "name": "Webcam Rose",
-                "price": 400,
-                "description": "Webcam Full HD 1080p com microfone",
-                "imageUrl": "https://http2.mlstatic.com/D_NQ_NP_997539-MLU71052328588_082023-O.webp",
-                "quantity": 2
+                "id": "prod001",
+                "name": "Amazon Echo Dot",
+                "price": 529,
+                "description": "O Amazon Echo Dot é seu assistente pessoal que torna sua vida mais conveniente.",
+                "imageUrl": "https://m.media-amazon.com/images/I/61-lJAEa4oL._AC_SY300_SX300_.jpg",
+                "quantity": 1
+            },
+            {
+                "id": "prod002",
+                "name": "Teclado Mecânico Premium",
+                "price": 1600,
+                "description": "Experimente a excelência em digitação com o Teclado Mecânico Premium. Conforto e durabilidade incomparáveis.",
+                "imageUrl": "https://m.media-amazon.com/images/I/51blOqa0fQL._AC_SL1000_.jpg",
+                "quantity": 1
             }
         ]
     }
@@ -371,6 +379,8 @@ A API fornece os seguintes endpoints para interagir com usuários, produtos e co
 
 -   **Response - Postman:** <br>
     ![Alt text](./src/images/image-7.png)
+
+    <!-- ![Alt text](image.png) -->
 
 ---
 
