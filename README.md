@@ -309,6 +309,8 @@ A API fornece os seguintes endpoints para interagir com usuários, produtos e co
 
 -   **Método HTTP:** POST
 -   **Descrição:** Cria uma nova compra e cadastrada no sistema.
+    -   **Importante:** Caso o id da compra(`idPurchase`) já esteja cadastrada no sistema e o id do comprador(`idBuyer`) fornecido seja correspondente com o da compra cadastrada, os produtos serão crescentados à compra existente.
+
 -   **Exemplo:**
 
     ```json
