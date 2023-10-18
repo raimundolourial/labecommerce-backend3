@@ -336,25 +336,17 @@ app.post('/products', async (req: Request, res: Response) => {
     }
 });
 
-// 📌 Create purchase
+// 📌 Create purchase (refatorado)
 // ✅ Detalhes revisados!
 app.post('/purchases', async (req: Request, res: Response) => {
     try {
         const { idPurchase, idBuyer, idProduct, quantity } = req.body;
 
-        // ==> VALIDAÇÕES
         // => idPurchase
         isString(idPurchase, 'idPurchase', res);
         isNotEmpty(idPurchase, 'idPurchase', res);
         CheckPrefixId(idPurchase, 'idPurchase', 'pur', res);
         checkMinimumLength(idPurchase, 'idPurchase', 4, res);
-        const [isIdPurchaseValid] = await db
-            .select('*')
-            .from('purchases')
-            .where({ id: idPurchase });
-        if (isIdPurchaseValid) {
-            throw new Error('O id fornecido já pertence a outra compra');
-        }
 
         // => idBuyer
         isString(idBuyer, 'idBuyer', res);
@@ -392,31 +384,65 @@ app.post('/purchases', async (req: Request, res: Response) => {
             .from('products')
             .where({ id: idProduct });
 
-        // cálculo
+        // => cálculo do total price
         const resultTotalPrice = Number(resultPrice.price) * Number(quantity);
 
-        // inserindo dados em purchases:
-        const newPurchase = {
-            id: idPurchase,
-            buyer: idBuyer,
-            total_price: resultTotalPrice,
-        };
-        await db('purchases').insert(newPurchase);
+        // VERIFICANDO SE ID DA COMPRA JÁ EXISTE e PERTENCE AO MESMO COMPRADOR INFORMADO:
+        // ==========================================
+        const [existingPurchase] = await db
+            .select('*')
+            .from('purchases')
+            .where({ id: idPurchase });
 
-        // inserindo dados em purchases_products:
-        const newPurchaseProduct = {
-            purchase_id: idPurchase,
-            product_id: idProduct,
-            quantity: quantity,
-        };
-        await db('purchases_products').insert(newPurchaseProduct);
+        if (existingPurchase) {
+            if (existingPurchase.buyer !== idBuyer) {
+                throw new Error(
+                    'O ID de compra fornecido já pertence a outro comprador'
+                );
+            } else {
+                // Atualizando o "total_price" de "purchases"
+                const newTotalPrice =
+                    Number(existingPurchase.total_price) + resultTotalPrice;
 
-        res.status(201).send({
-            message: 'Pedido realizado com sucesso',
-        });
+                await db('purchases')
+                    .where({ id: idPurchase })
+                    .update({ total_price: newTotalPrice });
+
+                // Inserir um novo registro na tabela "purchases_products"
+                const newPurchaseProduct = {
+                    purchase_id: idPurchase,
+                    product_id: idProduct,
+                    quantity: quantity,
+                };
+                await db('purchases_products').insert(newPurchaseProduct);
+
+                res.status(201).send({
+                    message: 'Pedido realizado com sucesso',
+                });
+            }
+        } else {
+            // Inserir um novo registro na tabela "purchases"
+            const newPurchase = {
+                id: idPurchase,
+                buyer: idBuyer,
+                total_price: resultTotalPrice,
+            };
+            await db('purchases').insert(newPurchase);
+
+            // Inserir um novo registro na tabela "purchases_products"
+            const newPurchaseProduct = {
+                purchase_id: idPurchase,
+                product_id: idProduct,
+                quantity: quantity,
+            };
+            await db('purchases_products').insert(newPurchaseProduct);
+            res.status(201).send({
+                message: 'Pedido realizado com sucesso',
+            });
+        }
     } catch (error) {
-        console.log(error);
-        if (req.statusCode === 200) {
+        console.error(error);
+        if (res.statusCode === 200) {
             res.status(500);
         }
         if (error instanceof Error) {
