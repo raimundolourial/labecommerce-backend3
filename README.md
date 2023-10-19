@@ -19,10 +19,11 @@ Clique [**AQUI**](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#int
 ## Índice
 
 -   [1. Resumo do Projeto](#1-resumo-do-projeto)
--   [2. Ferramentas e Tecnologias Utilizadas](#2-ferramentas-e-tecnologias-utilizadas)
--   [3. Instalação](#3-instalação)
--   [4. Inicialização](#4-inicialização)
--   [5. Endpoints](#5-endpoints)
+-   [2. Banco de dados](#2-banco-de-dados)
+-   [3. Ferramentas e Tecnologias Utilizadas](#3-ferramentas-e-tecnologias-utilizadas)
+-   [4. Instalação](#4-instalação)
+-   [5. Inicialização](#5-inicialização)
+-   [6. Endpoints](#6-endpoints)
     -   [Get all users](#get-all-users)
     -   [Create user](#create-user)
     -   [Get all products](#get-all-products)
@@ -33,19 +34,24 @@ Clique [**AQUI**](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#int
     -   [Create purchase](#create-purchase)
     -   [Get purchase by id](#get-purchase-by-id)
     -   [Delete purchase by id](#delete-purchase-by-id)
--   [6. Tratamento de Erros](#6-tratamento-de-erros)
--   [7. Lista de requisitos do projeto](#7-lista-de-requisitos-do-projeto)
--   [8. Desenvolvedora](#8-desenvolvedora)
+-   [7. Tratamento de Erros](#7-tratamento-de-erros)
+-   [8. Lista de requisitos do projeto](#8-lista-de-requisitos-do-projeto)
+-   [9. Desenvolvedora](#9-desenvolvedora)
 
 ## 1. Resumo do Projeto
 
 [🔼](#índice)
 
-Este é o primeiro projeto do Módulo Backend do Bootcamp da Labenu.
+O **Labecommerce-Backend** é o primeiro projeto do Módulo Backend do Bootcamp da Labenu e consiste em uma API para gerenciar usuários, produtos e compras em um ambiente de comércio eletrônico. A API oferece operações de CRUD abrangentes, o que facilita a administração desses elementos essenciais. Desenvolvida com tecnologias como Node.js, Typescript, Express e SQLite, a API disponibiliza um conjunto completo de endpoints, com destaque para a [documentação](https://documenter.getpostman.com/view/28316385/2s9YCBsofL#intro) detalhada no Postman.
 
-É um projeto de API que gerencia **usuários**, **produtos** e **compras**. O projeto define diversos endpoints para realizar operações de CRUD (Create, Read, Update, Delete).
+## 2. Banco de dados
 
-## 2. Ferramentas e Tecnologias Utilizadas
+[🔼](#índice)
+
+A modelagem do banco de dados segue a tabela a seguir: <br>
+![Alt text](./src/images/image-10.png)
+
+## 3. Ferramentas e Tecnologias Utilizadas
 
 [🔼](#índice)
 
@@ -59,7 +65,7 @@ Este projeto foi construído com:
 -   **Knex**
 -   **Postman**
 
-## 3. Instalação
+## 4. Instalação
 
 [🔼](#índice)
 
@@ -73,7 +79,7 @@ Ter instalado o `node.js` e o `npm` .
 npm install
 ```
 
-## 4. Inicialização
+## 5. Inicialização
 
 [🔼](#índice)
 
@@ -83,7 +89,7 @@ Para rodar o servidor localmente digite o seguinte comando:
 npm run dev
 ```
 
-## 5. Endpoints
+## 6. Endpoints
 
 [🔼](#índice)
 
@@ -309,6 +315,7 @@ A API fornece os seguintes endpoints para interagir com usuários, produtos e co
 
 -   **Método HTTP:** POST
 -   **Descrição:** Cria uma nova compra e cadastrada no sistema.
+
     -   **Importante:** Caso o id da compra(`idPurchase`) já esteja cadastrada no sistema e o id do comprador(`idBuyer`) fornecido seja correspondente com o da compra cadastrada, os produtos serão crescentados à compra existente.
 
 -   **Exemplo:**
@@ -411,40 +418,40 @@ A API fornece os seguintes endpoints para interagir com usuários, produtos e co
 
 ---
 
-## 6. Tratamento de Erros
+## 7. Tratamento de Erros
 
 [🔼](#índice)
 
 A API inclui tratamento de erros para lidar com várias situações, como validação de entrada, IDs duplicados e outros erros comuns. Isso garante que a API responda com mensagens de erro adequadas e status HTTP apropriados quando ocorrem problemas.
 
-## 7. Lista de requisitos do Projeto
+## 8. Lista de requisitos do Projeto
 
 [🔼](#índice)
 
--   [ ] Estruturar os dados como planejado:
+-   [ ✔ ] Estruturar os dados como planejado:
 
-    -   [ ] O banco de dados deve possuir as tabelas e colunas conforme o diagrama;
-    -   [ ] As requisições também devem respeitar o que é esperado, você pode confirmar as estruturas vendo os exemplos de cada endpoint;
-    -   [ ] Garanta que tanto o body, quanto a resposta e seu status estejam de acordo com o que foi planejado.
+    -   [ ✔ ] O banco de dados deve possuir as tabelas e colunas conforme o diagrama;
+    -   [ ✔ ] As requisições também devem respeitar o que é esperado, você pode confirmar as estruturas vendo os exemplos de cada endpoint;
+    -   [ ✔ ] Garanta que tanto o body, quanto a resposta e seu status estejam de acordo com o que foi planejado.
 
--   [ ] Implementar os Endpoints :
+-   [ ✔ ] Implementar os Endpoints :
 
-    -   [ ] Get all users
-    -   [ ] Create user
-    -   [ ] Create product
-    -   [ ] Get all products funcionalidades 1 e 2
-    -   [ ] Edit product by id
-    -   [ ] Create purchase
-    -   [ ] Delete purchase by id
-    -   [ ] Get purchase by id
+    -   [ ✔ ] Get all users
+    -   [ ✔ ] Create user
+    -   [ ✔ ] Create product
+    -   [ ✔ ] Get all products funcionalidades 1 e 2
+    -   [ ✔ ] Edit product by id
+    -   [ ✔ ] Create purchase
+    -   [ ✔ ] Delete purchase by id
+    -   [ ✔ ] Get purchase by id
 
--   [ ] Documentação no Postman de todos os endpoints (obrigatória para correção)
+-   [ ✔ ] Documentação no Postman de todos os endpoints (obrigatória para correção)
 
-    -   [ ] Descrevendo os endpoints e colocando os exemplos de respostas
+    -   [ ✔ ] Descrevendo os endpoints e colocando os exemplos de respostas
 
--   [ ] Criar o arquivo README.md , explicando seu projeto com prints das respostas
+-   [ ✔ ] Criar o arquivo README.md , explicando seu projeto com prints das respostas
 
-## 8. Desenvolvedora
+## 9. Desenvolvedora
 
 [🔼](#índice)
 
